@@ -15,14 +15,13 @@
   box-sizing: border-box;
 }
 
-/* overflow-x: hidden -> In phone screens nav menu is visible and located right of the screen, hence needs to be hidden. */
 html,
 body {
   margin: 0;
   padding: 0;
   color: #fff;
   font-family: "Poppins";
-  overflow-x: hidden;
+  overflow-x: hidden; /* Doesn't do anything - for extra safety(*Phone screens menu*). */
 }
 
 body {
@@ -30,10 +29,6 @@ body {
   background-color: #271637;
   display: flex;
   flex-direction: column;
-}
-
-body.hidden {
-  overflow: hidden;
 }
 
 /* Reverse default bullet list styling. */
@@ -59,7 +54,7 @@ nav {
   margin-top: 1.5rem; /*24px*/
 }
 
-div.logo img {
+div.logo-container img {
   height: 5rem;
   cursor: pointer;
 }
@@ -76,13 +71,13 @@ div.menu-phone-container-hamburger > i.hamburger {
   font-size: 2rem;
 }
 
-/* Prerequisites for underline hover animation */
+/* Prerequisites for underline hover animation on menu-list-items.*/
 a.item {
   position: relative;
   text-decoration: none;
 }
 
-/* Create a pseudo-element for the underline */
+/* Create a pseudo-element for the underline. */
 a.item::after {
   content: "";
   position: absolute;
@@ -192,6 +187,66 @@ div.bottom-social-container > a:nth-child(4) > i:hover {
 
 /* Responsiveness */
 
+/* Handles styling when hamburger is clicked. */
+@media (max-width: 767.9px) {
+  div.menu-phone-container {
+    position: relative;
+  }
+
+  div.menu-phone.expand {
+    right: 0;
+    transition: right 0.8s ease-in-out 0.1s;
+  }
+
+  div.menu-phone {
+    position: fixed; /*Stays visible despite scrolling. Also helps to maintain vertical position despite scrolling.*/
+    width: 100vw;
+    top: 0;
+    right: -120%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    place-items: center;
+    z-index: 100;
+    background: linear-gradient(to right, #271637 50%, #9812e0 100%);
+    transition: right 0.6s ease-in 0.2s;
+  }
+
+  div.menu-phone > i.close-btn {
+    font-size: 2rem;
+  }
+}
+
+/* XXXSM */
+@media (max-width: 300px) {
+  nav {
+    height: 100%;
+    flex-direction: column;
+  }
+
+  div.menu-phone-container-hamburger {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  div.menu-phone {
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: center;
+  }
+
+  main {
+    border-radius: 4rem 4rem 2rem 2rem; /*Larger border-radius overlaps with images at such small screen sizes.*/
+  }
+
+  div.bottom-social-container {
+    height: 100%; /*So that container expands the full size of its elements.*/
+    flex-direction: column; /*Verticaly stack them.*/
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
 /* SM */
 @media (min-width: 576px) {
   /* Nav */
@@ -220,7 +275,7 @@ div.bottom-social-container > a:nth-child(4) > i:hover {
     margin-top: 1.875rem; /*30px*/
   }
 
-  div.logo img {
+  div.logo-container img {
     height: inherit;
   }
 
@@ -310,35 +365,16 @@ div.bottom-social-container > a:nth-child(4) > i:hover {
 }
 
 /* XXL */
-@media (min-width: 1400px) {
+@media (min-width: 1800px) {
+  nav,
+  main {
+    width: 70%;
+  }
 }
 
-/* Handles styling when hamburger is clicked. */
-@media (max-width: 767.9px) {
-  div.menu-phone-container {
-    position: relative;
-  }
-
-  div.menu-phone.expand {
-    right: 0;
-    transition: right 0.8s ease-in-out 0.1s;
-  }
-
-  div.menu-phone {
-    position: fixed; /*Stays visible despite scrolling. Also helps to maintain vertical position despite scrolling.*/
-    width: 100vw;
-    top: 0;
-    right: -120%;
-    height: 100vh;
-    display: flex;
-    justify-content: space-evenly;
-    place-items: center;
-    z-index: 100;
-    background: linear-gradient(to right, #271637 50%, #9812e0 100%);
-    transition: right 0.6s ease-in 0.2s;
-  }
-
-  div.menu-phone > i.close-btn {
-    font-size: 2rem;
+@media (min-width: 2500px) {
+  nav,
+  main {
+    width: 60%;
   }
 }
