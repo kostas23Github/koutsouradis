@@ -315,15 +315,19 @@ div.bottom-social-container > a:nth-child(4) > i:hover {
 
 /* Handles styling when hamburger is clicked. */
 @media (max-width: 767.9px) {
+  div.menu-phone-container {
+    position: relative;
+  }
+
   div.menu-phone.expand {
     right: 0;
     transition: right 0.8s ease-in-out 0.1s;
-    position: fixed; /*Stays visible despite scrolling*/
   }
 
   div.menu-phone {
-    position: absolute;
+    position: fixed; /*Stays visible despite scrolling. Also helps to maintain vertical position despite scrolling.*/
     width: 100vw;
+    top: 0;
     right: -120%;
     height: 100vh;
     display: flex;
