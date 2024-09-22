@@ -1,0 +1,340 @@
+/* Imports */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* Universal */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+/* overflow-x: hidden -> In phone screens nav menu is visible and located right of the screen, hence needs to be hidden. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-family: "Poppins";
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #271637;
+  display: flex;
+  flex-direction: column;
+}
+
+body.hidden {
+  overflow: hidden;
+}
+
+/* Reverse default bullet list styling. */
+ul {
+  list-style: none;
+}
+
+/* Reverse default link styling.*/
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Navbar */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* This combined with height 55% is to align menu to middle of K logo and not the center.*/
+  height: 6rem;
+  width: 90%;
+  margin: auto;
+  margin-top: 1.5rem; /*24px*/
+}
+
+div.logo img {
+  height: 5rem;
+  cursor: pointer;
+}
+
+div.menu-laptop {
+  display: none;
+}
+
+div.menu-phone-container-hamburger {
+  height: 59%;
+}
+
+div.menu-phone-container-hamburger > i.hamburger {
+  font-size: 2rem;
+}
+
+/* Prerequisites for underline hover animation */
+a.item {
+  position: relative;
+  text-decoration: none;
+}
+
+/* Create a pseudo-element for the underline */
+a.item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px; /* Thickness of the line */
+  background-color: #6e4468; /* Line color */
+  transform: scaleX(0); /* Initial state - line hidden */
+  transform-origin: right; /* Line grows from right to left */
+  transition: transform 0.3s ease; /* Animation duration and easing */
+}
+
+/* Animation on hover */
+a.item:hover::after {
+  transform: scaleX(1); /* Line fully expands */
+  transform-origin: left; /* Line expands from left to right */
+}
+
+i {
+  cursor: pointer;
+  transition: 0.15s ease-in-out;
+}
+
+i:hover {
+  transform: scale(1.2);
+  transition: 0.2s;
+  transition: 0.2s ease-in-out 0.05s;
+}
+
+i.close-btn:hover,
+i.hamburger:hover {
+  opacity: 0.7;
+}
+
+/* Main Body */
+
+main {
+  flex-grow: 1; /*Fills the remaining space = body - nav - margins*/
+  outline: 0.25rem solid #6e4468; /*4px*/
+  border-radius: 12rem 12rem 2rem 2rem;
+  margin: auto; /*Sets main element width-middle screen.*/
+  margin-bottom: 1.25rem; /*20px*/
+  margin-top: 1rem; /*16px*/
+  width: 90%;
+  background: linear-gradient(
+    to top,
+    #271637 40%,
+    #9812e04d 80%,
+    #deb0f74d 95%,
+    #ebdef14d
+  );
+}
+
+div.main-content-logo-container > img {
+  display: none;
+}
+
+div.main-content-container {
+  margin: 2rem auto;
+}
+
+div.main-content-container > img {
+  margin: 0.2rem auto;
+  max-width: 95%;
+  display: block;
+  transition: 0.15s ease-in-out;
+}
+
+div.main-content-container > img:hover {
+  transform: scale(1.1);
+  transition: 0.2s ease-in-out 0.05s;
+}
+
+div.bottom-social-container {
+  height: 1.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+}
+
+div.bottom-social-container > a > i {
+  font-size: 1.7rem; /*~24px*/
+}
+
+/* From the grand-parent div container selects the first a tag child element then the child i element. */
+div.bottom-social-container > a:nth-child(1) > i:hover {
+  color: #1877f2;
+}
+
+div.bottom-social-container > a:nth-child(2) > i:hover {
+  color: transparent; /* Make the original icon transparent */
+  background-image: linear-gradient(
+    315deg,
+    #f58529,
+    #feda77,
+    #dd2a7b,
+    #8134af,
+    #515bd4
+  );
+  background-clip: text; /* For other browsers */
+}
+
+div.bottom-social-container > a:nth-child(4) > i:hover {
+  color: #0e76a8;
+}
+
+/* Responsiveness */
+
+/* SM */
+@media (min-width: 576px) {
+  /* Nav */
+  nav {
+    width: 90%;
+  }
+
+  /* Main */
+
+  div.main-content-container {
+    width: 70%;
+    margin: 2rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+  }
+}
+
+/* MD */
+@media (min-width: 768px) {
+  /* Nav menu becomes visible. */
+  nav {
+    width: 95%;
+    height: 9.44rem; /*151.03 Which matches logo height.*/
+    margin-top: 1.875rem; /*30px*/
+  }
+
+  div.logo img {
+    height: inherit;
+  }
+
+  div.menu-laptop {
+    height: 55%;
+    display: block;
+  }
+
+  ul {
+    display: flex;
+  }
+
+  li.menu-laptop-items {
+    padding-left: 1.3rem; /*32px*/
+    font-size: 1rem; /*18px*/
+    display: flex;
+    align-items: center;
+  }
+
+  div.menu-phone-container-hamburger,
+  div.menu-phone {
+    display: none;
+  }
+
+  /* Explains "position: relative" -> Main is the parent element of 3 children(1st the K logo container, 2nd the images container, 3rd the social container. 1st & 3rd containers are positioned absolute so by default the are positioned relative to the body element if all ancestors are "position: static(default)". By declaring the parent relative they are positioned according to this element. */
+  main {
+    width: 95%;
+    position: relative;
+    border-radius: 17rem 1.5rem; /*380px 24px*/
+    background: linear-gradient(
+      45deg,
+      #271637 40%,
+      #9812e04d 80%,
+      #deb0f74d 95%,
+      #ebdef14d
+    );
+  }
+
+  /* The available space to be positioned absolutely is only that of the main parent element. */
+  div.main-content-logo-container > img {
+    display: block;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+  }
+
+  div.main-content-container {
+    align-items: center;
+  }
+
+  div.bottom-social-container {
+    width: 70%;
+    margin: 1rem auto;
+  }
+}
+
+/* LG */
+@media (min-width: 992px) {
+  li.menu-laptop-items {
+    padding-left: 2rem; /*32px*/
+    font-size: 1.125rem; /*18px*/
+  }
+
+  main {
+    border-radius: 23.75rem 1.5rem; /*380px 24px*/
+  }
+
+  div.bottom-social-container {
+    height: 1.5rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 144px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}
+
+/* XL */
+@media (min-width: 1200px) {
+  li.menu-laptop-items {
+    padding-left: 3rem; /*32px*/
+    font-size: 1.5rem; /*18px*/
+  }
+}
+
+/* XXL */
+@media (min-width: 1400px) {
+}
+
+/* Handles styling when hamburger is clicked. */
+@media (max-width: 767.9px) {
+  div.menu-phone.expand {
+    right: 0;
+    transition: right 0.8s ease-in-out 0.1s;
+    position: fixed; /*Stays visible despite scrolling*/
+  }
+
+  div.menu-phone {
+    position: absolute;
+    width: 100vw;
+    right: -120%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    place-items: center;
+    z-index: 100;
+    background: linear-gradient(to right, #271637 50%, #9812e0 100%);
+    transition: right 0.6s ease-in 0.2s;
+  }
+
+  div.menu-phone > i.close-btn {
+    font-size: 2rem;
+  }
+}
